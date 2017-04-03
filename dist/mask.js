@@ -1,7 +1,7 @@
 /*!
  * angular-ui-mask
  * https://github.com/angular-ui/ui-mask
- * Version: 1.8.5 - 2016-06-10T16:53:59.510Z
+ * Version: 1.8.5 - 2017-04-03T19:36:19.311Z
  * License: MIT
  */
 
@@ -89,7 +89,7 @@ angular.module('ui.mask', [])
                             var originalIsEmpty = controller.$isEmpty;
                             controller.$isEmpty = function(value) {
                                 if (maskProcessed) {
-                                    return originalIsEmpty(unmaskValue(value || ''));
+                                    return originalIsEmpty(unmaskValue(angular.isDefined(value) ? value : ''));
                                 } else {
                                     return originalIsEmpty(value);
                                 }
@@ -351,7 +351,7 @@ angular.module('ui.mask', [])
                                 if (angular.isDefined(placeholder) && placeholder[i]) {
                                     return placeholder[i];
                                 } else {
-                                    defaultPlaceholderChar = angular.isDefined(iAttrs.uiMaskPlaceholderChar) && iAttrs.uiMaskPlaceholderChar ? iAttrs.uiMaskPlaceholderChar : '_';
+                                    defaultPlaceholderChar = angular.isDefined(iAttrs.uiMaskPlaceholderChar) && iAttrs.uiMaskPlaceholderChar ? iAttrs.uiMaskPlaceholderChar : 'space';
                                     return (defaultPlaceholderChar.toLowerCase() === 'space') ? ' ' : defaultPlaceholderChar[0];
                                 }
                             }
@@ -470,7 +470,7 @@ angular.module('ui.mask', [])
                                     // Angular uses html element and calls setViewValue(element.value.trim()), setting it to the trimmed mask
                                     // when it should be empty
                                     var currentVal = iElement.val();
-                                    var isTemporarilyEmpty = value === '' && currentVal && angular.isDefined(iAttrs.uiMaskPlaceholderChar) && iAttrs.uiMaskPlaceholderChar === 'space'; 
+                                    var isTemporarilyEmpty = value === '' && currentVal && angular.isDefined(iAttrs.uiMaskPlaceholderChar) && iAttrs.uiMaskPlaceholderChar === 'space';
                                     if(isTemporarilyEmpty) {
                                         iElement.val('');
                                     }
