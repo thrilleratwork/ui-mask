@@ -79,7 +79,7 @@ angular.module('ui.mask', [])
                             var originalIsEmpty = controller.$isEmpty;
                             controller.$isEmpty = function(value) {
                                 if (maskProcessed) {
-                                    return originalIsEmpty(unmaskValue(value || ''));
+                                    return originalIsEmpty(unmaskValue(angular.isDefined(value) ? value : ''));
                                 } else {
                                     return originalIsEmpty(value);
                                 }
@@ -460,7 +460,7 @@ angular.module('ui.mask', [])
                                     // Angular uses html element and calls setViewValue(element.value.trim()), setting it to the trimmed mask
                                     // when it should be empty
                                     var currentVal = iElement.val();
-                                    var isTemporarilyEmpty = value === '' && currentVal && angular.isDefined(iAttrs.uiMaskPlaceholderChar) && iAttrs.uiMaskPlaceholderChar === 'space'; 
+                                    var isTemporarilyEmpty = value === '' && currentVal && angular.isDefined(iAttrs.uiMaskPlaceholderChar) && iAttrs.uiMaskPlaceholderChar === 'space';
                                     if(isTemporarilyEmpty) {
                                         iElement.val('');
                                     }
